@@ -27,7 +27,7 @@
     },    
     "autoload": {
         "psr-0": {
-            "mvaSnappy": "src/"
+            "MvaSnappy": "src/"
         },
         "classmap": [
             "./Module.php"
