@@ -42,8 +42,8 @@ class Module
     
         return array(
             'factories' => array(
-                'mvasnappy.pdf.service'    => '\MvaSnappy\Service\MvaSnappyPdfServiceFactory',
-                'mvasnappy.image.service'  => '\MvaSnappy\Service\MvaSnappyImageServiceFactory',
+                'mvasnappy.pdf.service'    => '\MvaSnappy\Services\MvaSnappyPdfServiceFactory',
+                'mvasnappy.image.service'  => '\MvaSnappy\Services\MvaSnappyImageServiceFactory',
             ),
         );
     }

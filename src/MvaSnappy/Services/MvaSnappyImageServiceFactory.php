@@ -1,6 +1,6 @@
 <?php
 
-namespace mvaSnappy\Service;
+namespace MvaSnappy\Services;
 
 
 use Knp\Snappy\Image;
