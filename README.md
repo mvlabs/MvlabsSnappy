@@ -1,7 +1,7 @@
 MvaSnappy
 =========
 
-MvaSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
+MvaSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf]conversion utility.
 
 Installation
 ------------
@@ -67,7 +67,7 @@ return array(
          )
      )   
 );
-    ```
+```
 
 Usage
 -----
@@ -79,9 +79,12 @@ The module registers two services:
 
 ### Generate an image from an URL
 
-     $this->serviceLocator->get('mvasnappy.image.service')->getOutput('http://www.mvlabs.it');
+     $this->serviceLocator->get('mvasnappy.image.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/image.jpg');
 
 ### Generate a pdf document from an URL
 
-     $this->serviceLocator->get('mvasnappy.pdf.service')->getOutput('http://www.mvlabs.it');
+     $this->serviceLocator->get('mvasnappy.pdf.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
+     
+
+    
     
