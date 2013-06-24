@@ -1,7 +1,7 @@
 MvaSnappy
 =========
 
-MvaSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf]conversion utility.
+MvaSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
 
 Installation
 ------------
@@ -86,5 +86,52 @@ The module registers two services:
      $this->serviceLocator->get('mvasnappy.pdf.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
      
 
+### Render a pdf document as response from a controller
+
+```php
+    public function testPdfAction() {
+    
+        $now = new \DateTime();
+        $viewRenderer = $this->serviceLocator->get('view_manager')->getRenderer();
+         
+        $layoutViewModel = $this->layout();
+        $layoutViewModel->setTemplate('myModule/myController/layout');
+    
+        $viewModel = new ViewModel(array(
+            'vars' => $vars,            
+        ));
+    
+        $viewModel->setTemplate('myModule/myController/pdf-template');
+            
+        $layoutViewModel->setVariables(array(
+            'content' => $viewRenderer->render($viewModel),
+        ));
+    
+        $htmlOutput = $viewRenderer->render($layoutViewModel);
+        
+        $output = $this->serviceLocator->get('mvasnappy.pdf.service')->getOutputFromHtml($htmlOutput);
+        
+        $response = $this->getResponse();
+        $headers  = $response->getHeaders();
+        $headers->addHeaderLine('Content-Type', 'application/pdf');
+        $headers->addHeaderLine('Content-Disposition', "attachment; filename=\"export-" . $now->format('d-m-Y H:i:s') . ".pdf\"");
+        
+        $response->setContent($output);
+        
+        return $response;
+    
+    }    
+```    
+
+
+Credits
+-------
+
+MvaSnappy and [Snappy][snappy] are based on the awesome [wkhtmltopdf][wkhtmltopdf].
+MvaSnappy has been developed by [mvassociati][mvassociati].
+
+[snappy]: https://github.com/KnpLabs/snappy
+[wkhtmltopdf]: http://code.google.com/p/wkhtmltopdf/
+[mvassociati]: http://www.mvassociati.it
     
     
