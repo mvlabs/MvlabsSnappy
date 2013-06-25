@@ -128,10 +128,12 @@ Credits
 -------
 
 MvaSnappy and [Snappy][snappy] are based on the awesome [wkhtmltopdf][wkhtmltopdf].
-MvaSnappy has been developed by [mvassociati][mvassociati].
+MvaSnappy has been developed by [mvlabs][mvlabs].
 
 [snappy]: https://github.com/KnpLabs/snappy
 [wkhtmltopdf]: http://code.google.com/p/wkhtmltopdf/
+[mvlabs]: http://www.mvlabs.it
 [mvassociati]: http://www.mvassociati.it/en
+
     
     
