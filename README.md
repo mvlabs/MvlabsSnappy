@@ -7,7 +7,7 @@ Installation
 ------------
 #### With composer
 
-1. Add this project and [MvaSnappy](https://github.com/mvassociati/MvaSnappy.git) in your composer.json:
+1. Add to your `composer.json`:
 
     ```json
     "require": {
