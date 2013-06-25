@@ -7,11 +7,11 @@ Installation
 ------------
 #### With composer
 
-1. Add this project and [MvaSnappy](https://github.com/drigani/MvaSnappy.git) in your composer.json:
+1. Add this project and [MvaSnappy](https://github.com/mvassociati/MvaSnappy.git) in your composer.json:
 
     ```json
     "require": {
-        "digani/MvaSnappy": "dev-master"
+        "mvassociati/MvaSnappy": "dev-master"
     }
     ```
 
@@ -27,7 +27,7 @@ Installation
     git clone https://github.com/KnpLabs/snappy.git vendor/snappy
 
     # Install ZF2 Module
-    git clone https://github.com/drigani/MvaSnappy.git vendor/digani/MvaSnappy
+    git clone https://github.com/mvassociati/MvaSnappy.git vendor/mvassociati/MvaSnappy
     
 
 #### Post installation
@@ -48,7 +48,7 @@ Installation
 Configuration
 -------------
 After installing MvaSnappy, copy
-`./vendor/drigani/MvaSnappy/config/mva-snappy.local.php.dist` to
+`./vendor/mvassociati/MvaSnappy/config/mva-snappy.local.php.dist` to
 `./config/autoload/mva-snappy.local.php` and change the binaries path  and add options as desired.
 
 
@@ -59,11 +59,11 @@ return array(
     'mva-snappy' => array(
         'pdf' => array(
            'binary'  => '/usr/local/bin/wkhtmltopdf',
-           'options' => array(),
+           'options' => array(), // Type wkhtmltopdf -H to see the list of options
         ),   
         'image' => array(
             'binary'  => '/usr/local/bin/wkhtmltoimage',
-            'options' => array(),
+            'options' => array(), // Type wkhtmltoimage -H to see the list of options
          )
      )   
 );
@@ -95,7 +95,7 @@ The module registers two services:
         $viewRenderer = $this->serviceLocator->get('view_manager')->getRenderer();
          
         $layoutViewModel = $this->layout();
-        $layoutViewModel->setTemplate('myModule/myController/layout');
+        $layoutViewModel->setTemplate('layout/pdf-layout');
     
         $viewModel = new ViewModel(array(
             'vars' => $vars,            
@@ -132,6 +132,6 @@ MvaSnappy has been developed by [mvassociati][mvassociati].
 
 [snappy]: https://github.com/KnpLabs/snappy
 [wkhtmltopdf]: http://code.google.com/p/wkhtmltopdf/
-[mvassociati]: http://www.mvassociati.it
+[mvassociati]: http://www.mvassociati.it/en
     
     
