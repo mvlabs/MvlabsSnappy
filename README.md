@@ -27,7 +27,7 @@ Installation
     git clone https://github.com/KnpLabs/snappy.git vendor/snappy
 
     # Install ZF2 Module
-    git clone https://github.com/mvassociati/MvaSnappy.git vendor/mvassociati/MvaSnappy
+    git clone https://github.com/mvassociati/MvaSnappy.git vendor/mvassociati/mva-snappy
     
 
 #### Post installation
