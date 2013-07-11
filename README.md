@@ -11,7 +11,7 @@ Installation
 
     ```json
     "require": {
-        "mvassociati/MvaSnappy": "dev-master"
+        "mvlabs/MvaSnappy": "dev-master"
     }
     ```
 
@@ -27,7 +27,7 @@ Installation
     git clone https://github.com/KnpLabs/snappy.git vendor/snappy
 
     # Install ZF2 Module
-    git clone https://github.com/mvassociati/MvaSnappy.git vendor/mvassociati/mva-snappy
+    git clone https://github.com/mvlabs/MvaSnappy.git vendor/mvlabs/mva-snappy
     
 
 #### Post installation
@@ -48,7 +48,7 @@ Installation
 Configuration
 -------------
 After installing MvaSnappy, copy
-`./vendor/mvassociati/MvaSnappy/config/mva-snappy.local.php.dist` to
+`./vendor/mvlabs/MvaSnappy/config/mva-snappy.local.php.dist` to
 `./config/autoload/mva-snappy.local.php` and change the binaries path  and add options as desired.
 
 
