@@ -1,6 +1,6 @@
 <?php
 return array(
-    'mva-snappy' => array(
+    'mvlabs-snappy' => array(
         'pdf' => array(
            'binary'  => '/usr/local/bin/wkhtmltopdf',
            'options' => array(),

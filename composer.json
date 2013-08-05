@@ -1,6 +1,6 @@
 {
-    "name": "mvlabs/mva-snappy",
-    "description": "MvaSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the  wkhtmltopdf/wkhtmltoimage conversion utility.",
+    "name": "mvlabs/mvlabs-snappy",
+    "description": "MvlabsSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the  wkhtmltopdf/wkhtmltoimage conversion utility.",
     "license": "MIT",
     "type": "zf2-module",
     "keywords": [
@@ -14,7 +14,7 @@
         "MvLabs", 
         "zf2"
     ],
-    "homepage": "https://github.com/mvlabs/MvaSnappy.git",
+    "homepage": "https://github.com/mvlabs/MvlabsSnappy.git",
     "authors": [
         {
             "name": "Diego Drigani",
@@ -29,7 +29,7 @@
     },    
     "autoload": {
         "psr-0": {
-            "MvaSnappy": "src/"
+            "MvlabsSnappy": "src/"
         },
         "classmap": [
             "./Module.php"

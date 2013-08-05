@@ -1,7 +1,7 @@
-MvaSnappy
+MvlabsSnappy
 =========
 
-MvaSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
+MvlabsSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
 
 Installation
 ------------
@@ -11,11 +11,11 @@ Installation
 
     ```json
     "require": {
-        "mvlabs/MvaSnappy": "dev-master"
+        "mvlabs/MvlabsSnappy": "dev-master"
     }
     ```
 
-2. Now tell composer to download MvaSnappy by running the command:
+2. Now tell composer to download MvlabsSnappy by running the command:
 
     ```bash
     $ php composer.phar update
@@ -27,7 +27,7 @@ Installation
     git clone https://github.com/KnpLabs/snappy.git vendor/snappy
 
     # Install ZF2 Module
-    git clone https://github.com/mvlabs/MvaSnappy.git vendor/mvlabs/mva-snappy
+    git clone https://github.com/mvlabs/MvlabsSnappy.git vendor/mvlabs/mvlabs-snappy
     
 
 #### Post installation
@@ -39,7 +39,7 @@ Installation
     return array(
         'modules' => array(
             // ...
-            'MvaSnappy',            
+            'MvlabsSnappy',            
         ),
         // ...
     );
@@ -47,16 +47,16 @@ Installation
 
 Configuration
 -------------
-After installing MvaSnappy, copy
-`./vendor/mvlabs/MvaSnappy/config/mva-snappy.local.php.dist` to
-`./config/autoload/mva-snappy.local.php` and change the binaries path  and add options as desired.
+After installing MvlabsSnappy, copy
+`./vendor/mvlabs/MvlabsSnappy/config/mvlabs-snappy.local.php.dist` to
+`./config/autoload/mvlabs-snappy.local.php` and change the binaries path  and add options as desired.
 
 
-    # /config/autoload/mva-snappy.local.php
+    # /config/autoload/mvlabs-snappy.local.php
 ```php    
 <?php
 return array(
-    'mva-snappy' => array(
+    'mvlabs-snappy' => array(
         'pdf' => array(
            'binary'  => '/usr/local/bin/wkhtmltopdf',
            'options' => array(), // Type wkhtmltopdf -H to see the list of options
@@ -127,16 +127,16 @@ Usage
 
 The module registers two services:  
 
- - the `mvasnappy.image.service` service allows you to generate images;
- - the `mvasnappy.pdf.service` service allows you to generate pdf files.
+ - the `mvlabssnappy.image.service` service allows you to generate images;
+ - the `mvlabssnappy.pdf.service` service allows you to generate pdf files.
 
 ### Generate an image from an URL
 
-     $this->serviceLocator->get('mvasnappy.image.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/image.jpg');
+     $this->serviceLocator->get('mvlabssnappy.image.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/image.jpg');
 
 ### Generate a pdf document from an URL
 
-     $this->serviceLocator->get('mvasnappy.pdf.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
+     $this->serviceLocator->get('mvlabssnappy.pdf.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
      
 
 ### Render a pdf document as response from a controller
@@ -162,7 +162,7 @@ The module registers two services:
     
         $htmlOutput = $viewRenderer->render($layoutViewModel);
         
-        $output = $this->serviceLocator->get('mvasnappy.pdf.service')->getOutputFromHtml($htmlOutput);
+        $output = $this->serviceLocator->get('mvlabssnappy.pdf.service')->getOutputFromHtml($htmlOutput);
         
         $response = $this->getResponse();
         $headers  = $response->getHeaders();
@@ -180,8 +180,8 @@ The module registers two services:
 Credits
 -------
 
-MvaSnappy and [Snappy][snappy] are based on the awesome [wkhtmltopdf][wkhtmltopdf].
-MvaSnappy has been developed by [mvlabs][mvlabs].
+MvlabsSnappy and [Snappy][snappy] are based on the awesome [wkhtmltopdf][wkhtmltopdf].
+MvlabsSnappy has been developed by [mvlabs][mvlabs].
 
 [snappy]: https://github.com/KnpLabs/snappy
 [wkhtmltopdf]: http://code.google.com/p/wkhtmltopdf/
