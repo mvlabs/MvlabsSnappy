@@ -1,19 +1,19 @@
 <?php
 
-namespace MvaSnappy\Services;
+namespace MvlabsSnappy\Services;
 
 
-use Knp\Snappy\Image;
+use Knp\Snappy\Pdf;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 
-class MvaSnappyImageServiceFactory implements FactoryInterface
+class MvlabsSnappyPdfServiceFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $services)
     {
         $config  = $services->get('config');
-        $service = new \Knp\Snappy\Image($config['mva-snappy']['image']['binary'], $config['mva-snappy']['image']['options']);
+        $service = new \Knp\Snappy\Pdf($config['mvlabs-snappy']['pdf']['binary'], $config['mvlabs-snappy']['pdf']['options']);
         
         return $service;
     }

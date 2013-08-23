@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace MvaSnappy;
+namespace MvlabsSnappy;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -42,8 +42,8 @@ class Module
     
         return array(
             'factories' => array(
-                'mvasnappy.pdf.service'    => '\MvaSnappy\Services\MvaSnappyPdfServiceFactory',
-                'mvasnappy.image.service'  => '\MvaSnappy\Services\MvaSnappyImageServiceFactory',
+                'mvlabssnappy.pdf.service'    => '\MvlabsSnappy\Services\MvlabsSnappyPdfServiceFactory',
+                'mvlabssnappy.image.service'  => '\MvlabsSnappy\Services\MvlabsSnappyImageServiceFactory',
             ),
         );
     }
