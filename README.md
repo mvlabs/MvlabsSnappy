@@ -11,7 +11,7 @@ Installation
 
     ```json
     "require": {
-        "mvlabs/MvlabsSnappy": "dev-master"
+        "mvlabs/mvlabs-snappy": "dev-master"
     }
     ```
 
