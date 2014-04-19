@@ -13,7 +13,7 @@ class MvlabsSnappyPdfServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $services)
     {
         $config  = $services->get('config');
-        $service = new \Knp\Snappy\Pdf($config['mvlabs-snappy']['pdf']['binary'], $config['mvlabs-snappy']['pdf']['options']);
+        $service = new Pdf($config['mvlabs-snappy']['pdf']['binary'], $config['mvlabs-snappy']['pdf']['options']);
         
         return $service;
     }
