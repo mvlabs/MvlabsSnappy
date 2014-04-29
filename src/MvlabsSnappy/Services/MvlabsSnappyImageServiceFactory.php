@@ -13,7 +13,7 @@ class MvlabsSnappyImageServiceFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $services)
     {
         $config  = $services->get('config');
-        $service = new \Knp\Snappy\Image($config['mvlabs-snappy']['image']['binary'], $config['mvlabs-snappy']['image']['options']);
+        $service = new Image($config['mvlabs-snappy']['image']['binary'], $config['mvlabs-snappy']['image']['options']);
         
         return $service;
     }
