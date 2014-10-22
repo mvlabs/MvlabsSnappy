@@ -31,37 +31,205 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="mvlabssnappy" class="anchor" href="#mvlabssnappy"><span class="octicon octicon-link"></span></a>MvlabsSnappy</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>MvlabsSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the <a href="http://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a> conversion utility.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h4>
+<a name="with-composer" class="anchor" href="#with-composer"><span class="octicon octicon-link"></span></a>With composer</h4>
+
+<ol>
+<li>
+<p>Add to your <code>composer.json</code>:</p>
+
+<div class="highlight highlight-json"><pre><span class="s2">"require"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nt">"mvlabs/mvlabs-snappy"</span><span class="p">:</span> <span class="s2">"dev-master"</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+<li>
+<p>Now tell composer to download MvlabsSnappy by running the command:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>php composer.phar update
+</pre></div>
+</li>
+</ol>
+
+<h4>
+<a name="or-just-clone-the-repos" class="anchor" href="#or-just-clone-the-repos"><span class="octicon octicon-link"></span></a>Or just clone the repos:</h4>
+
+<pre><code># Install snappy library
+git clone https://github.com/KnpLabs/snappy.git vendor/snappy
+
+# Install ZF2 Module
+git clone https://github.com/mvlabs/MvlabsSnappy.git vendor/mvlabs/mvlabs-snappy
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h4>
+<a name="post-installation" class="anchor" href="#post-installation"><span class="octicon octicon-link"></span></a>Post installation</h4>
+
+<ol>
+<li>
+<p>Enabling it in your <code>application.config.php</code>file.</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'modules'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// ...</span>
+        <span class="s1">'MvlabsSnappy'</span><span class="p">,</span>            
+    <span class="p">),</span>
+    <span class="c1">// ...</span>
+<span class="p">);</span>
+</pre></div>
+</li>
+</ol>
+
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>After installing MvlabsSnappy, copy
+<code>./vendor/mvlabs/MvlabsSnappy/config/mvlabs-snappy.local.php.dist</code> to
+<code>./config/autoload/mvlabs-snappy.local.php</code> and change the binaries path  and add options as desired.</p>
+
+<pre><code># /config/autoload/mvlabs-snappy.local.php
+</code></pre>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">return</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'mvlabs-snappy'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'pdf'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+           <span class="s1">'binary'</span>  <span class="o">=&gt;</span> <span class="s1">'/usr/local/bin/wkhtmltopdf'</span><span class="p">,</span>
+           <span class="s1">'options'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span> <span class="c1">// Type wkhtmltopdf -H to see the list of options</span>
+        <span class="p">),</span>   
+        <span class="s1">'image'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'binary'</span>  <span class="o">=&gt;</span> <span class="s1">'/usr/local/bin/wkhtmltoimage'</span><span class="p">,</span>
+            <span class="s1">'options'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(),</span> <span class="c1">// Type wkhtmltoimage -H to see the list of options</span>
+         <span class="p">)</span>
+     <span class="p">)</span>   
+<span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="wkhtmltopdf-binary-as-composer-dependencies" class="anchor" href="#wkhtmltopdf-binary-as-composer-dependencies"><span class="octicon octicon-link"></span></a>wkhtmltopdf binary as composer dependencies</h2>
+
+<p>If you want to download wkhtmltopdf with composer you add to <code>composer.json</code>:</p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"google/wkhtmltopdf-i386"</span><span class="p">:</span> <span class="s2">"0.11.0-RC1"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>or this if you are in 64 bit based system:</p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"google/wkhtmltopdf-amd64"</span><span class="p">:</span> <span class="s2">"0.11.0-RC1"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<blockquote>
+<p><strong>NOTE</strong>: to be able to use those custom defined packages you need to copy into your <code>composer.json</code> following code:</p>
+</blockquote>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"repositories"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"package"</span><span class="p">,</span>
+            <span class="nt">"package"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"google/wkhtmltopdf-amd64"</span><span class="p">,</span>
+                <span class="nt">"version"</span><span class="p">:</span> <span class="s2">"0.11.0-RC1"</span><span class="p">,</span>
+                <span class="nt">"dist"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2"</span><span class="p">,</span>
+                    <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"tar"</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"package"</span><span class="p">,</span>
+            <span class="nt">"package"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"google/wkhtmltopdf-i386"</span><span class="p">,</span>
+                <span class="nt">"version"</span><span class="p">:</span> <span class="s2">"0.11.0-RC1"</span><span class="p">,</span>
+                <span class="nt">"dist"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-i386.tar.bz2"</span><span class="p">,</span>
+                    <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"tar"</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>The module registers two services:  </p>
+
+<ul>
+<li>the <code>mvlabssnappy.image.service</code> service allows you to generate images;</li>
+<li>the <code>mvlabssnappy.pdf.service</code> service allows you to generate pdf files.</li>
+</ul>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="generate-an-image-from-an-url" class="anchor" href="#generate-an-image-from-an-url"><span class="octicon octicon-link"></span></a>Generate an image from an URL</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<pre><code> $this-&gt;serviceLocator-&gt;get('mvlabssnappy.image.service')-&gt;generate('http://www.mvlabs.it', '/path/to/myapp/data/image.jpg');
+</code></pre>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="generate-a-pdf-document-from-an-url" class="anchor" href="#generate-a-pdf-document-from-an-url"><span class="octicon octicon-link"></span></a>Generate a pdf document from an URL</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<pre><code> $this-&gt;serviceLocator-&gt;get('mvlabssnappy.pdf.service')-&gt;generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
+</code></pre>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="render-a-pdf-document-as-response-from-a-controller" class="anchor" href="#render-a-pdf-document-as-response-from-a-controller"><span class="octicon octicon-link"></span></a>Render a pdf document as response from a controller</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<div class="highlight highlight-php"><pre>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testPdfAction</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="nv">$now</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">();</span>
+        <span class="nv">$viewRenderer</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">serviceLocator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'view_manager'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getRenderer</span><span class="p">();</span>
+
+        <span class="nv">$layoutViewModel</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">layout</span><span class="p">();</span>
+        <span class="nv">$layoutViewModel</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">'layout/pdf-layout'</span><span class="p">);</span>
+
+        <span class="nv">$viewModel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ViewModel</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">'vars'</span> <span class="o">=&gt;</span> <span class="nv">$vars</span><span class="p">,</span>            
+        <span class="p">));</span>
+
+        <span class="nv">$viewModel</span><span class="o">-&gt;</span><span class="na">setTemplate</span><span class="p">(</span><span class="s1">'myModule/myController/pdf-template'</span><span class="p">);</span>
+
+        <span class="nv">$layoutViewModel</span><span class="o">-&gt;</span><span class="na">setVariables</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+            <span class="s1">'content'</span> <span class="o">=&gt;</span> <span class="nv">$viewRenderer</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$viewModel</span><span class="p">),</span>
+        <span class="p">));</span>
+
+        <span class="nv">$htmlOutput</span> <span class="o">=</span> <span class="nv">$viewRenderer</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="nv">$layoutViewModel</span><span class="p">);</span>
+
+        <span class="nv">$output</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">serviceLocator</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'mvlabssnappy.pdf.service'</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getOutputFromHtml</span><span class="p">(</span><span class="nv">$htmlOutput</span><span class="p">);</span>
+
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+        <span class="nv">$headers</span>  <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">();</span>
+        <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">addHeaderLine</span><span class="p">(</span><span class="s1">'Content-Type'</span><span class="p">,</span> <span class="s1">'application/pdf'</span><span class="p">);</span>
+        <span class="nv">$headers</span><span class="o">-&gt;</span><span class="na">addHeaderLine</span><span class="p">(</span><span class="s1">'Content-Disposition'</span><span class="p">,</span> <span class="s2">"attachment; filename=</span><span class="se">\"</span><span class="s2">export-"</span> <span class="o">.</span> <span class="nv">$now</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">'d-m-Y H:i:s'</span><span class="p">)</span> <span class="o">.</span> <span class="s2">".pdf</span><span class="se">\"</span><span class="s2">"</span><span class="p">);</span>
+
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nv">$output</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+
+    <span class="p">}</span>    
+</pre></div>
+
+<h2>
+<a name="credits" class="anchor" href="#credits"><span class="octicon octicon-link"></span></a>Credits</h2>
+
+<p>MvlabsSnappy and <a href="https://github.com/KnpLabs/snappy">Snappy</a> are based on the awesome <a href="http://code.google.com/p/wkhtmltopdf/">wkhtmltopdf</a>.
+MvlabsSnappy has been developed by <a href="http://www.mvlabs.it">mvlabs</a>.</p>
       </section>
     </div>
 
