@@ -18,14 +18,14 @@
     "authors": [
         {
             "name": "Diego Drigani",
-            "email": "d.drigani@mvassociati.it",
-            "homepage": "http://www.mvassociati.it/en/"
+            "email": "d.drigani@mvlabs.it",
+            "homepage": "http://www.mvlabs.it/en/"
         }
     ],
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.*",
-        "knplabs/knp-snappy": "0.1.0"
+        "knplabs/knp-snappy": "0.3.*"
     },    
     "autoload": {
         "psr-0": {
