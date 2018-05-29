@@ -1,34 +1,13 @@
 MvlabsSnappy
 =========
 
-MvlabsSnappy is a ZF2 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
+MvlabsSnappy is a ZF2/ZF3 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.3+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
 
 Installation
 ------------
 #### With composer
 
-1. Add to your `composer.json`:
-
-    ```json
-    "require": {
-        "mvlabs/mvlabs-snappy": "dev-master"
-    }
-    ```
-
-2. Now tell composer to download MvlabsSnappy by running the command:
-
-    ```bash
-    $ php composer.phar update
-    ```
-
-#### Or just clone the repos:
-    
-    # Install snappy library
-    git clone https://github.com/KnpLabs/snappy.git vendor/snappy
-
-    # Install ZF2 Module
-    git clone https://github.com/mvlabs/MvlabsSnappy.git vendor/mvlabs/mvlabs-snappy
-    
+    php composer.phar require mvlabs/mvlabs-snappy 
 
 #### Post installation
 
@@ -36,13 +15,13 @@ Installation
 
     ```php
     <?php
-    return array(
-        'modules' => array(
+    return [
+        'modules' => [
             // ...
             'MvlabsSnappy',            
-        ),
+        ],
         // ...
-    );
+    ];
     ```
 
 Configuration
@@ -55,18 +34,18 @@ After installing MvlabsSnappy, copy
     # /config/autoload/mvlabs-snappy.local.php
 ```php    
 <?php
-return array(
-    'mvlabs-snappy' => array(
-        'pdf' => array(
+return [
+    'mvlabs-snappy' => [
+        'pdf' => [
            'binary'  => '/usr/local/bin/wkhtmltopdf',
-           'options' => array(), // Type wkhtmltopdf -H to see the list of options
-        ),   
-        'image' => array(
+           'options' => [], // Type wkhtmltopdf -H to see the list of options
+        ],   
+        'image' => [
             'binary'  => '/usr/local/bin/wkhtmltoimage',
-            'options' => array(), // Type wkhtmltoimage -H to see the list of options
-         )
-     )   
-);
+            'options' => [], // Type wkhtmltoimage -H to see the list of options
+         ]
+     ]   
+];
 ```
 
 ## wkhtmltopdf binary as composer dependencies
@@ -76,51 +55,36 @@ If you want to download wkhtmltopdf with composer you add to `composer.json`:
 ```json
 {
     "require": {
-        "google/wkhtmltopdf-i386": "0.11.0-RC1"
+        "h4cc/wkhtmltopdf-i386": "0.12.4"
     }
 }
 ```
 
-or this if you are in 64 bit based system:
+Or require the package for _i386_ with:
+
+    php composer.phar require h4cc/wkhtmltopdf-i386 "0.12.4"
+
+If you are in 64 bit based system:
 
 ```json
 {
     "require": {
-        "google/wkhtmltopdf-amd64": "0.11.0-RC1"
+        "h4cc/wkhtmltopdf-amd64": "0.12.4"
     }
 }
 ```
 
-> __NOTE__: to be able to use those custom defined packages you need to copy into your `composer.json` following code:
+Or require the package for _amd64_ with:
 
-```json
-{
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "google/wkhtmltopdf-amd64",
-                "version": "0.11.0-RC1",
-                "dist": {
-                    "url": "http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-amd64.tar.bz2",
-                    "type": "tar"
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "google/wkhtmltopdf-i386",
-                "version": "0.11.0-RC1",
-                "dist": {
-                    "url": "http://wkhtmltopdf.googlecode.com/files/wkhtmltopdf-0.11.0_rc1-static-i386.tar.bz2",
-                    "type": "tar"
-                }
-            }
-        }
-    ]
-}
-```
+    php composer.phar require h4cc/wkhtmltopdf-amd64 "0.12.4"
+
+The binary will then be located at:
+
+    vendor/h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf-i386
+
+Also a symlink will be created in your configured bin/ folder, for example:
+
+    vendor/bin/wkhtmltopdf-i386
 
 Usage
 -----
@@ -132,37 +96,57 @@ The module registers two services:
 
 ### Generate an image from an URL
 
-     $this->serviceLocator->get('mvlabssnappy.image.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/image.jpg');
+     $mvlabsSnappyImage = $container->get('mvlabssnappy.image.service'),   
+     $mvlabsSnappyImage->generate('http://www.mvlabs.it', '/path/to/myapp/data/image.jpg');
 
 ### Generate a pdf document from an URL
 
-     $this->serviceLocator->get('mvlabssnappy.pdf.service')->generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
+     $mvlabsSnappyPdf = $container->get('mvlabssnappy.pdf.service'),   
+     $mvlabsSnappyPdf->generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
      
 
 ### Render a pdf document as response from a controller
 
 ```php
-    public function testPdfAction() {
+
+class IndexController extends AbstractActionController
+{
+    /**
+     * @var Knp\Snappy\Pdf;
+     */
+    protected $mvlabsSnappyPdf;
+
+    /**
+     * @var Zend\View\Renderer\RendererInterface
+     */
+    protected $renderer;
     
-        $now = new \DateTime();
-        $viewRenderer = $this->serviceLocator->get('view_manager')->getRenderer();
+    public function __construct(Pdf $mvlabsSnappyPdf, RendererInterface $renderer)
+    {
+        $this->mvlabsSnappyPdf = $mvlabsSnappyPdf;
+        $this->renderer = $renderer;
+    }
+    
+    public function testPdfAction() 
+    {
+        $now = new \DateTime();        
          
         $layoutViewModel = $this->layout();
         $layoutViewModel->setTemplate('layout/pdf-layout');
     
-        $viewModel = new ViewModel(array(
+        $viewModel = new ViewModel([
             'vars' => $vars,            
-        ));
+        ]);
     
         $viewModel->setTemplate('myModule/myController/pdf-template');
             
-        $layoutViewModel->setVariables(array(
-            'content' => $viewRenderer->render($viewModel),
-        ));
+        $layoutViewModel->setVariables([
+            'content' => $this->renderer->render($viewModel),
+        ]);
     
-        $htmlOutput = $viewRenderer->render($layoutViewModel);
+        $htmlOutput = $this->renderer->render($layoutViewModel);
         
-        $output = $this->serviceLocator->get('mvlabssnappy.pdf.service')->getOutputFromHtml($htmlOutput);
+        $output = $this->mvlabsSnappyPdf->getOutputFromHtml($htmlOutput);
         
         $response = $this->getResponse();
         $headers  = $response->getHeaders();
@@ -171,9 +155,9 @@ The module registers two services:
         
         $response->setContent($output);
         
-        return $response;
-    
+        return $response;  
     }    
+}
 ```    
 
 
