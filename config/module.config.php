@@ -1,13 +1,14 @@
 <?php
-return array(
-    'mvlabs-snappy' => array(
-        'pdf' => array(
-           'binary'  => '/usr/local/bin/wkhtmltopdf',
-           'options' => array(),
-        ),   
-        'image' => array(
-            'binary'  => '/usr/local/bin/wkhtmltoimage',
-            'options' => array(),
-         )
-     )   
-);
+
+return [
+    'mvlabs-snappy' => [
+        'pdf' => [
+           'binary'  => '/usr/bin/wkhtmltopdf',
+           'options' => [],
+        ],
+        'image' => [
+            'binary'  => '/usr/bin/wkhtmltoimage',
+            'options' => [],
+         ]
+     ]
+];
