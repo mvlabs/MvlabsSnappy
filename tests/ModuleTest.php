@@ -2,13 +2,14 @@
 namespace MvlabsSnappyTest;
 
 use MvlabsSnappy\Module;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ModuleTest
  * @author Diego Drigani <d.drigani@mvlabs.it>
  * @link http://www.mvlabs.it
  */
-class ModuleTest extends \PHPUnit_Framework_TestCase
+class ModuleTest extends TestCase
 {
     /**
      * @var Module

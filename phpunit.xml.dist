@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<phpunit bootstrap="./bootstrap.php" colors="true">
+<phpunit bootstrap="./tests/Bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="MvlabsSnappy Module">
-            <file>./ModuleTest.php</file>
+            <directory suffix=".php">./tests</directory>
         </testsuite>
     </testsuites>
     
