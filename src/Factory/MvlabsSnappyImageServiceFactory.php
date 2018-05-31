@@ -21,7 +21,7 @@ class MvlabsSnappyImageServiceFactory implements FactoryInterface
     {
         $config  = $container->get('config');
         $service = new Image($config['mvlabs-snappy']['image']['binary'], $config['mvlabs-snappy']['image']['options']);
-        
+
         return $service;
     }
 }

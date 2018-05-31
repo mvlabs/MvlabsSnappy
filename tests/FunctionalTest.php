@@ -32,5 +32,4 @@ class FunctionalTest extends TestCase
         $this->assertInstanceof('Knp\Snappy\Image', $image);
         $this->assertEquals('/usr/bin/wkhtmltoimage', $image->getBinary());
     }
-
 }

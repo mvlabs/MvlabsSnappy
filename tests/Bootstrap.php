@@ -27,19 +27,19 @@ class Bootstrap
 
     public static function init()
     {
-        $appConfig = array(
-            'module_listener_options' => array(
+        $appConfig = [
+            'module_listener_options' => [
                 'module_paths' => [
                     './../module',
                     './../vendor',
                 ],
-            ),
-            'modules' => array(
+            ],
+            'modules' => [
                 'Zend\Router',
                 'Zend\Validator',
                 'MvlabsSnappy',
-            )
-        );
+            ]
+        ];
 
         static::$application = Application::init($appConfig);
 
