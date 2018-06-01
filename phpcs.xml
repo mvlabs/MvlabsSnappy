@@ -24,4 +24,6 @@
     <!-- Paths to check -->
     <file>src</file>
     <file>tests</file>
+
+    <exclude-pattern>tests/Bootstrap.php</exclude-pattern>
 </ruleset>
