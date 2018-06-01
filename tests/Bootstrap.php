@@ -36,8 +36,7 @@ class Bootstrap
             ],
             'modules' => [
                 'Zend\Router',
-                'Zend\Validator',
-                'MvlabsSnappy',
+                'MvlabsSnappy'
             ]
         ];
 
