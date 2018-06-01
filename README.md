@@ -1,6 +1,9 @@
 MvlabsSnappy
 =========
 [![Build Status](https://travis-ci.org/mvlabs/MvlabsSnappy.svg?branch=master)](https://travis-ci.org/mvlabs/MvlabsSnappy)
+[![Latest Stable Version](https://poser.pugx.org/mvlabs/mvlabs-snappy/v/stable)](https://packagist.org/packages/mvlabs/mvlabs-snappy)
+[![Total Downloads](https://poser.pugx.org/mvlabs/mvlabs-snappy/downloads)](https://packagist.org/packages/mvlabs/mvlabs-snappy)
+[![License](https://poser.pugx.org/mvlabs/mvlabs-snappy/license)](https://packagist.org/packages/mvlabs/mvlabs-snappy)
 
 MvlabsSnappy is a ZF2/ZF3 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.6+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
 
