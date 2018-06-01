@@ -21,7 +21,7 @@ final class Module implements ServiceProviderInterface
 
     public function getServiceConfig()
     {
-    
+
         return [
             'aliases' => [
                 'mvlabssnappy.pdf.service' => Pdf::class,

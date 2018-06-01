@@ -1,14 +1,47 @@
+sudo: false
+
 language: php
 
-branches:
-  only:
-    - master
-    - develop
-php:
-  - 5.6
-  - 7.0
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - vendor
 
-before_script:
-  - composer update --dev
+env:
+  global:
+    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
 
-script: phpunit
+matrix:
+  include:
+    - php: 7.0
+      env:
+        - DEPS=lowest
+    - php: 7.0
+      env:
+        - DEPS=locked
+        - CS_CHECK=true
+    - php: 5.6
+      env:
+        - DEPS=lowest
+    - php: 5.6
+      env:
+        - DEPS=locked
+        - LEGACY_DEPS="phpunit/phpunit"
+
+notifications:
+  email: d.drigani@mvlabs.it
+
+before_install:
+  - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
+  - travis_retry composer self-update
+
+install:
+  - travis_retry composer install $COMPOSER_ARGS --ignore-platform-reqs
+  - if [[ $LEGACY_DEPS != '' ]]; then travis_retry composer update $COMPOSER_ARGS --with-dependencies $LEGACY_DEPS ; fi
+  - if [[ $DEPS == 'latest' ]]; then travis_retry composer update $COMPOSER_ARGS ; fi
+  - if [[ $DEPS == 'lowest' ]]; then travis_retry composer update --prefer-lowest --prefer-stable $COMPOSER_ARGS ; fi
+  - composer show
+
+script:
+  - composer test
+  - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi

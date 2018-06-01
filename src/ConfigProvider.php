@@ -16,7 +16,7 @@ final class ConfigProvider
 
         return [
             'mvlabs-snappy' => $mvlabsSnappyModule->getConfig(),
-            'dependencies' =>  $mvlabsSnappyModule->getServiceConfig(),
+            'dependencies' => $mvlabsSnappyModule->getServiceConfig(),
         ];
     }
 }

@@ -12,7 +12,6 @@ use Interop\Container\ContainerInterface;
 use Knp\Snappy\Pdf;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
-
 class MvlabsSnappyPdfServiceFactory implements FactoryInterface
 {
     /**
@@ -22,7 +21,7 @@ class MvlabsSnappyPdfServiceFactory implements FactoryInterface
     {
         $config  = $container->get('config');
         $service = new Pdf($config['mvlabs-snappy']['pdf']['binary'], $config['mvlabs-snappy']['pdf']['options']);
-        
+
         return $service;
     }
 }
