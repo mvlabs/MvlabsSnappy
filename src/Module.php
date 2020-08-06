@@ -10,7 +10,7 @@ namespace MvlabsSnappy;
 
 use Knp\Snappy\Image;
 use Knp\Snappy\Pdf;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Laminas\ModuleManager\Feature\ServiceProviderInterface;
 
 final class Module implements ServiceProviderInterface
 {

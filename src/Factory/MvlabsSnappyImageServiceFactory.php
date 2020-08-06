@@ -10,7 +10,7 @@ namespace MvlabsSnappy\Factory;
 
 use Interop\Container\ContainerInterface;
 use Knp\Snappy\Image;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 class MvlabsSnappyImageServiceFactory implements FactoryInterface
 {
