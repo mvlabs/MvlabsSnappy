@@ -12,7 +12,7 @@ if (file_exists($file = $vendorDir . '/autoload.php')) {
 
 namespace MvlabsSnappyTest;
 
-use Zend\Mvc\Application;
+use Laminas\Mvc\Application;
 
 error_reporting(E_ALL | E_STRICT);
 chdir(__DIR__);
@@ -35,7 +35,7 @@ class Bootstrap
                 ],
             ],
             'modules' => [
-                'Zend\Router',
+                'Laminas\Router',
                 'MvlabsSnappy'
             ]
         ];

@@ -5,13 +5,13 @@ MvlabsSnappy
 [![Total Downloads](https://poser.pugx.org/mvlabs/mvlabs-snappy/downloads)](https://packagist.org/packages/mvlabs/mvlabs-snappy)
 [![License](https://poser.pugx.org/mvlabs/mvlabs-snappy/license)](https://packagist.org/packages/mvlabs/mvlabs-snappy)
 
-MvlabsSnappy is a ZF2/ZF3 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.6+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
+MvlabsSnappy is a Laminas 3 module that allow easy to thumbnail, snapshot or PDF generation from a url or a html page using Snappy PHP (5.6+) wrapper for the [wkhtmltopdf][wkhtmltopdf] conversion utility.
 
 Installation
 ------------
 #### With composer
 
-    php composer.phar require mvlabs/mvlabs-snappy 
+    php composer.phar require mvlabs/mvlabs-snappy
 
 #### Post installation
 
@@ -22,7 +22,7 @@ Installation
     return [
         'modules' => [
             // ...
-            'MvlabsSnappy',            
+            'MvlabsSnappy',
         ],
         // ...
     ];
@@ -36,19 +36,19 @@ After installing MvlabsSnappy, copy
 
 
     # /config/autoload/mvlabs-snappy.local.php
-```php    
+```php
 <?php
 return [
     'mvlabs-snappy' => [
         'pdf' => [
            'binary'  => '/usr/local/bin/wkhtmltopdf',
            'options' => [], // Type wkhtmltopdf -H to see the list of options
-        ],   
+        ],
         'image' => [
             'binary'  => '/usr/local/bin/wkhtmltoimage',
             'options' => [], // Type wkhtmltoimage -H to see the list of options
          ]
-     ]   
+     ]
 ];
 ```
 
@@ -93,21 +93,21 @@ Also a symlink will be created in your configured bin/ folder, for example:
 Usage
 -----
 
-The module registers two services:  
+The module registers two services:
 
  - the `mvlabssnappy.image.service` service allows you to generate images;
  - the `mvlabssnappy.pdf.service` service allows you to generate pdf files.
 
 ### Generate an image from an URL
 
-     $mvlabsSnappyImage = $container->get('mvlabssnappy.image.service'),   
+     $mvlabsSnappyImage = $container->get('mvlabssnappy.image.service'),
      $mvlabsSnappyImage->generate('http://www.mvlabs.it', '/path/to/myapp/data/image.jpg');
 
 ### Generate a pdf document from an URL
 
-     $mvlabsSnappyPdf = $container->get('mvlabssnappy.pdf.service'),   
+     $mvlabsSnappyPdf = $container->get('mvlabssnappy.pdf.service'),
      $mvlabsSnappyPdf->generate('http://www.mvlabs.it', '/path/to/myapp/data/document.pdf');
-     
+
 
 ### Render a pdf document as response from a controller
 
@@ -121,48 +121,48 @@ class IndexController extends AbstractActionController
     protected $mvlabsSnappyPdf;
 
     /**
-     * @var Zend\View\Renderer\RendererInterface
+     * @var Laminas\View\Renderer\RendererInterface
      */
     protected $renderer;
-    
+
     public function __construct(Pdf $mvlabsSnappyPdf, RendererInterface $renderer)
     {
         $this->mvlabsSnappyPdf = $mvlabsSnappyPdf;
         $this->renderer = $renderer;
     }
-    
-    public function testPdfAction() 
+
+    public function testPdfAction()
     {
-        $now = new \DateTime();        
-         
+        $now = new \DateTime();
+
         $layoutViewModel = $this->layout();
         $layoutViewModel->setTemplate('layout/pdf-layout');
-    
+
         $viewModel = new ViewModel([
-            'vars' => $vars,            
+            'vars' => $vars,
         ]);
-    
+
         $viewModel->setTemplate('myModule/myController/pdf-template');
-            
+
         $layoutViewModel->setVariables([
             'content' => $this->renderer->render($viewModel),
         ]);
-    
+
         $htmlOutput = $this->renderer->render($layoutViewModel);
-        
+
         $output = $this->mvlabsSnappyPdf->getOutputFromHtml($htmlOutput);
-        
+
         $response = $this->getResponse();
         $headers  = $response->getHeaders();
         $headers->addHeaderLine('Content-Type', 'application/pdf');
         $headers->addHeaderLine('Content-Disposition', "attachment; filename=\"export-" . $now->format('d-m-Y H:i:s') . ".pdf\"");
-        
+
         $response->setContent($output);
-        
-        return $response;  
-    }    
+
+        return $response;
+    }
 }
-```    
+```
 
 
 Credits
@@ -176,5 +176,5 @@ MvlabsSnappy has been developed by [mvlabs][mvlabs].
 [mvlabs]: http://www.mvlabs.it
 [mvassociati]: http://www.mvassociati.it/en
 
-    
-    
+
+
