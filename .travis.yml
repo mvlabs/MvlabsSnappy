@@ -23,9 +23,6 @@ matrix:
     - php: 5.6
       env:
         - DEPS=lowest
-    - php: 5.6
-      env:
-        - DEPS=locked
 
 notifications:
   email: d.drigani@mvlabs.it
